@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Test Video Call</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/peerjs@1.4.5/dist/peerjs.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div id="menu" class="row mt-5">
+      <p>Your ID:</p>
+      <p id="userId"></p>
+
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Peer id" />
+      </div>
+      <div class="col">
+        <button id="start-call" class="btn btn-success">Connect</button>
+      </div>
+    </div>
+
+
+    <div id="live">
+      <div class="row">
+        <div class="col">
+          <video id="local-video" muted="true"></video>
+          <button id="end-call" class="btn btn-danger">End Call</button>
+        </div>
+        <div class="col">
+          <video id="remote-video"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

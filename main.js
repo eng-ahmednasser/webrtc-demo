@@ -51,8 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // get user id
     const peerId = document.querySelector("input").value;
     // get the camera and mic permission
-    const getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    const localStream = await getUserMedia({
+    const localStream = await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: true,
     });

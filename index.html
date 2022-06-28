@@ -14,11 +14,10 @@
 <body>
   <div class="container">
     <div id="menu" class="row mt-5">
-      <p>Your ID:</p>
-      <p id="userId"></p>
+      <p>Your ID:  <span id="userId"></span></p>
 
       <div class="col">
-        <input type="text" class="form-control" placeholder="Peer id" />
+        <input type="text" class="form-control" placeholder="User ID" />
       </div>
       <div class="col">
         <button id="start-call" class="btn btn-success">Connect</button>
@@ -26,15 +25,13 @@
     </div>
 
 
-    <div id="live">
-      <div class="row">
-        <div class="col">
-          <video id="local-video" muted="true"></video>
-          <button id="end-call" class="btn btn-danger">End Call</button>
-        </div>
-        <div class="col">
-          <video id="remote-video"></video>
-        </div>
+    <div id="live" class="row">
+      <div class="col-6 d-inline-block">
+        <video id="local-video" muted="true" class="w-100"></video>
+        <button id="end-call" class="btn btn-danger">End Call</button>
+      </div>
+      <div class="col-6 d-inline-block">
+        <video id="remote-video" class="w-100"></video>
       </div>
     </div>
   </div>

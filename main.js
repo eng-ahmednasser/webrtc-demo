@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => { 
   const startCallBtn = document.querySelector('#start-call')
   const endCallBtn = document.querySelector('#end-call')
-  const remoteVideoElm = document.querySelector("#remote-video")
+  const remoteVideoSelector = "#remote-video"
+  const remoteVideoElm = document.querySelector(remoteVideoSelector)
   const localVideoElm = document.querySelector("#local-video")
   const menuElm = document.querySelector("#menu")
   const liveElm = document.querySelector("#live")
 
   const peer = new Peer();
   let currentCall;
-  peer.on("open", function (id) {
+  peer.on("open", (id) => {
     document.getElementById("userId").textContent = id;
   });
 
@@ -50,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // get user id
     const peerId = document.querySelector("input").value;
     // get the camera and mic permission
-    const stream = await navigator.mediaDevices.getUserMedia({
+    const getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    const localStream = await getUserMedia({
       video: true,
       audio: true,
     });
@@ -58,10 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // switch to the video call and play the camera preview
     menuElm.style.display = "none";
     liveElm.style.display = "block";
-    localVideoElm.srcObject = stream;
+    localVideoElm.srcObject = localStream;
     localVideoElm.play();
     // make the call
-    const call = peer.call(peerId, stream);
+    const call = peer.call(peerId, localStream);
 
     call.on("stream", (stream) => {
       remoteVideoElm.srcObject = stream;
@@ -88,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     liveElm.style.display = "none";
     if (!currentCall) return;
     try {
+      currentCall.localStream.getTracks().forEach(t => t.stop())
       currentCall.close();
     } catch {}
     currentCall = undefined;
